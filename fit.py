@@ -67,7 +67,7 @@ else:
         if os.stat(file_path).st_size:
             doc = read_wiki_file(file_path, 
                                  remove_preface_segment=False, 
-                                 high_granularity=False, 
+                                 high_granularity=True, 
                                  return_as_sentences=True)
             
             sents = []
