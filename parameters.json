@@ -1,4 +1,4 @@
-{"corpus": "wiki", 
+{"corpus": "test", 
 "encoder": "paraphrase-xlm-r-multilingual-v1", 
 "threshold_multipliers": [0.5, 1.5, 2, 3],
 "window_values": [2, 5, 10, 15],
