@@ -54,10 +54,12 @@ def main(args):
             file_paths.append(os.path.join(root, file))
     
     for file_path in file_paths:
+        if ".DS_Store" in file_path:
+            continue
         if os.stat(file_path).st_size:
             doc = read_wiki_file(file_path, 
                                  remove_preface_segment=False, 
-                                 high_granularity=True, 
+                                 high_granularity=True,
                                  return_as_sentences=True)
             
             sents = []

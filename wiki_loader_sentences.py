@@ -101,7 +101,9 @@ def read_wiki_file(path, word2vec=None, remove_preface_segment=True, ignore_list
                         data.append(sentence)
             if data:
                 targets.append(len(data) - 1)
-
+    # data: first split each section, then for each section, split by "\n"
+    # targets: index of first paragraph (\n) for each section
+    data = [subdata for subdata in data if subdata]
     return data, targets, path
 
 

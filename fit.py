@@ -65,19 +65,29 @@ else:
     
     for file_path in file_paths:
         if os.stat(file_path).st_size:
-            doc = read_wiki_file(file_path, 
-                                 remove_preface_segment=False, 
-                                 high_granularity=True, 
+            if ".DS_Store" in file_path:
+                continue
+            # todo: why need read_wiki_file???
+            doc = read_wiki_file(file_path,
+                                 remove_preface_segment=False,
+                                 high_granularity=True,
                                  return_as_sentences=True)
             
             sents = []
             labs = []
+            index = 0
             for subs in doc[0]:
                 if subs.startswith('===='):
+                    subs = subs.replace("====", "")
+                    index = len(sents) - 1
                     labs.append(index)
+                    sents.extend(nltk.sent_tokenize(subs))
+                    # sents.extend(nltk.sent_tokenize(subs, language='german'))
                 else:
                     sents.extend(nltk.sent_tokenize(subs))
+                    # sents.extend(nltk.sent_tokenize(subs, language='german'))
                     index = len(sents)-1
+            # sents is all sentences in a story
             labs.append(len(sents)-1)
             path = file_path
             data.append([sents, labs, path])
