@@ -64,6 +64,7 @@ def main(args):
             
             sents = []
             for subs in doc[0]:
+                subs = subs.replace("====", "")
                 if re.findall('[A-Za-z]+', subs):
                     sents.extend(nltk.sent_tokenize(subs))
             if sents:
